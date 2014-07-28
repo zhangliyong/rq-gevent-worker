@@ -151,9 +151,9 @@ class GeventWorker(Worker):
         return result
 
 
-def gevent_main():
+def main():
     import sys
-    from rq.scripts.rqworker import main
+    from rq.scripts.rqworker import main as rq_main
 
     if '-w' in sys.argv or '--worker-class' in sys.argv:
         print("You cannot specify worker class when using this script,"
@@ -161,7 +161,4 @@ def gevent_main():
         sys.exit(1)
 
     sys.argv.extend(['-w', 'rq_gevent_worker.GeventWorker'])
-    main()
-
-if __name__ == '__main__':
-    gevent_main()
+    rq_main()
