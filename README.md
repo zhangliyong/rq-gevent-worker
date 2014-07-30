@@ -16,6 +16,11 @@ Implement a new worker based on gevent
 ##Under The Hood
 TODO
 
+##TODO
+
+* Add test
+* Add a command line option to specify gevent pool size
+
 ##Note
 
 ###Crash
