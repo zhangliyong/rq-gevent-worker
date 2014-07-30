@@ -9,6 +9,8 @@ Implement a new worker based on gevent
 
 ##Usage
 
+    rqgeventworker -h
+
     $ export PYTHONPATH=<your project import path>:$PYTHONPATH; rqgeventworker
 
 ##Under The Hood
@@ -19,6 +21,7 @@ TODO
 ###Crash
 Official `Worker` use `os.fork()` to spawn a child process to execute a job,
 so if the job cause the process crash, the worker process is still alive.
+
 When using gevent, we use the same process to execute job, the job may
 cause the whole worker process crash.
 
