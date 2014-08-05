@@ -9,7 +9,7 @@ Implement a new worker based on gevent
 
 ##Usage
 
-    rqgeventworker -h
+    $ rqgeventworker -h
 
     $ export PYTHONPATH=<your project import path>:$PYTHONPATH; rqgeventworker
 
