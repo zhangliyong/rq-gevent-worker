@@ -3,6 +3,8 @@ rq-gevent-worker
 
 Implement a new worker based on gevent
 
+[![Downloads](https://pypip.in/download/rq-gevent-worker/badge.svg)](https://pypi.python.org/pypi/rq-gevent-worker/)
+
 ##Install
 
     $ pip install rq-gevent-worker
