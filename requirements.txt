@@ -1,0 +1,5 @@
+gevent
+rq
+# for running tests
+chronic
+pytest

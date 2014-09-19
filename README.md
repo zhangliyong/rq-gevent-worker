@@ -15,6 +15,12 @@ Implement a new worker based on gevent
 
     $ export PYTHONPATH=<your project import path>:$PYTHONPATH; rqgeventworker
 
+##Test
+
+    $ pip install -r requirements.txt
+
+    $ py.test tests
+
 ##Under The Hood
 TODO
 
