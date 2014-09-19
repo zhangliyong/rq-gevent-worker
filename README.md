@@ -26,7 +26,6 @@ TODO
 
 ##TODO
 
-* Add test
 * Add a command line option to specify gevent pool size
 
 ##Note
