@@ -2,7 +2,8 @@
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 
-from gevent import monkey
+from gevent import monkey, get_hub
+from gevent.hub import LoopExit
 monkey.patch_all()
 
 import signal
@@ -96,6 +97,15 @@ class GeventWorker(Worker):
                 timeout = None if burst else max(1, self.default_worker_ttl - 60)
                 try:
                     result = self.dequeue_job_and_maintain_ttl(timeout)
+
+                    if result is None and burst:
+                        try:
+                            # Make sure dependented jobs are enqueued.
+                            get_hub().switch()
+                        except LoopExit:
+                            pass
+                        result = self.dequeue_job_and_maintain_ttl(timeout)
+
                     if result is None:
                         break
                 except StopRequested:
@@ -107,8 +117,6 @@ class GeventWorker(Worker):
         finally:
             if not self.is_horse:
                 self.register_death()
-            if burst:
-                self.gevent_pool.join()
         return self.did_perform_work
 
     def execute_job(self, job, queue):
