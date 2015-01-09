@@ -42,9 +42,10 @@ class GeventWorker(Worker):
         super(GeventWorker, self).register_birth()
         self.connection.hset(self.key, 'pool_size', self.gevent_pool.size)
 
-    def heartbeat(self, timeout=0):
+    def heartbeat(self, timeout=0, pipeline=None):
+        connection = pipeline if pipeline is not None else self.connection
         super(GeventWorker, self).heartbeat(timeout)
-        self.connection.hset(self.key, 'curr_pool_len', len(self.gevent_pool))
+        connection.hset(self.key, 'curr_pool_len', len(self.gevent_pool))
 
     def _install_signal_handlers(self):
         def request_force_stop():
