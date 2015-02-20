@@ -10,7 +10,7 @@ import signal
 import gevent
 import gevent.pool
 from rq import Worker
-from rq.job import Status
+from rq.job import JobStatus
 from rq.timeouts import BaseDeathPenalty, JobTimeoutException
 from rq.worker import StopRequested, green, blue
 from rq.exceptions import DequeueTimeout
@@ -124,7 +124,7 @@ class GeventWorker(Worker):
         def job_done(child):
             self.did_perform_work = True
             self.heartbeat()
-            if job.get_status() == Status.FINISHED:
+            if job.get_status() == JobStatus.FINISHED:
                 queue.enqueue_dependents(job)
 
         child_greenlet = self.gevent_pool.spawn(self.perform_job, job)
