@@ -10,7 +10,10 @@ import signal
 import gevent
 import gevent.pool
 from rq import Worker
-from rq.job import JobStatus
+try: # for rq >= 0.5.0
+    from rq.job import JobStatus
+except: # for rq <= 0.46 
+    from rq.job import Status as JobStatus
 from rq.timeouts import BaseDeathPenalty, JobTimeoutException
 from rq.worker import StopRequested, green, blue
 from rq.exceptions import DequeueTimeout
