@@ -12,7 +12,7 @@ import gevent.pool
 from rq import Worker
 try: # for rq >= 0.5.0
     from rq.job import JobStatus
-except: # for rq <= 0.46 
+except ImportError: # for rq <= 0.46 
     from rq.job import Status as JobStatus
 from rq.timeouts import BaseDeathPenalty, JobTimeoutException
 from rq.worker import StopRequested, green, blue
